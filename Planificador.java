@@ -15,7 +15,7 @@ public class Planificador{
            int rafaga,tiempo,memoria,llegada, cantidad,opc, quantum, prioridad,id;
            int i = 0;
            String nombre;
-           List<Object> cola = new LinkedList<Object>();
+           ArrayList<Proceso> cola = new ArrayList<Proceso>();
         System.out.println("\n¿Cuantos procesos deseas generar (1-10 maximo)?\n");
         cantidad = in.nextInt(); //lectura desde el teclado
         while (cantidad>10) { //validacion de los datos 
@@ -39,13 +39,14 @@ public class Planificador{
                      Proceso proceso = new Proceso(nombre,rafaga,memoria,llegada,id,prioridad,quantum);
                      cola.add(proceso);
                  }
+                    acomodarObjetos(cola,cantidad);
           
          break;
              case 2:
              	
                  
                  
-                 for (i=1;i<=procesos;i++) { //para dar valor de la propiedad a cada proceso
+                 for (i=1;i<=cantidad;i++) { //para dar valor de la propiedad a cada proceso
                      System.out.println("\n¿Id del proceso"+ i +"(1-10 maximo)?\n"); 
                      id = in.nextInt();
 	                 while (id>10) { //validacion
@@ -53,8 +54,11 @@ public class Planificador{
 	                     id = in.nextInt();
 	                 }
 	                 System.out.println("\n¿Nombre del proceso"+ i + "(dos caracteres maximo)?\n");
-	                 nombre = lee.readLine();
-	                 nombre1[i]=nombre;
+                     try{
+                          nombre = lee.readLine();
+                        }catch(IOException e){
+                          e.printStackTrace();
+                        }
 	                 System.out.println("\n¿Tamaño de proceso" + i +"en memoria (1-1000)?\n");
 	                 memoria = in.nextInt();
 	                 while (memoria>1001) {
@@ -116,4 +120,29 @@ public class Planificador{
 
 	    return randomNum;
 	}
+
+    public static void acomodarObjetos(ArrayList<Proceso> cola, int contador){
+        int i;
+        int temp = 0;
+        int pos;
+        ArrayList<Proceso> cola2 = new ArrayList<Proceso>();
+        Proceso temo;
+        Proceso nuevo;
+
+        do{
+
+        }while(cola.size()<0);
+
+        for (i=0; i<contador ;i++ ) {
+            temo = cola.get(i);
+
+            if (temp <= temo.llegada) {
+                temp = temo.llegada;
+                pos = i;
+                nuevo = temo;
+            }
+        }
+        cola.remove(pos);
+        cola2.add(nuevo);
+    } 
 }
