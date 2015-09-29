@@ -19,4 +19,7 @@ public class Proceso {
 	 public void imprimir(){
 	 	System.out.println(id);
 	 }
+	 public Proceso(){
+	 	
+	 }
 }

@@ -13,7 +13,7 @@ public class Planificador{
            Scanner in = new Scanner(System.in); //para ingresar los valores
            
            int rafaga,tiempo,memoria,llegada, cantidad,opc, quantum, prioridad,id;
-           int i = 0;
+           int i = 0, size;
            String nombre;
            ArrayList<Proceso> cola = new ArrayList<Proceso>();
         System.out.println("\n¿Cuantos procesos deseas generar (1-10 maximo)?\n");
@@ -39,7 +39,8 @@ public class Planificador{
                      Proceso proceso = new Proceso(nombre,rafaga,memoria,llegada,id,prioridad,quantum);
                      cola.add(proceso);
                  }
-                    acomodarObjetos(cola,cantidad);
+                    System.out.println(cola);
+                    acomodarObjetos(cola);
           
          break;
              case 2:
@@ -121,28 +122,32 @@ public class Planificador{
 	    return randomNum;
 	}
 
-    public static void acomodarObjetos(ArrayList<Proceso> cola, int contador){
+    public static void acomodarObjetos(ArrayList<Proceso> cola){
         int i;
         int temp = 0;
-        int pos;
+        int pos = 0;
+        int tam = cola.size();
         ArrayList<Proceso> cola2 = new ArrayList<Proceso>();
         Proceso temo;
-        Proceso nuevo;
+        Proceso nuevo = new Proceso();
 
         do{
+            for (i=0; i<tam;i++ ) {
+                temo = cola.get(i);
 
-        }while(cola.size()<0);
-
-        for (i=0; i<contador ;i++ ) {
-            temo = cola.get(i);
-
-            if (temp <= temo.llegada) {
-                temp = temo.llegada;
-                pos = i;
-                nuevo = temo;
+                if (temp <= temo.llegada) {
+                    temp = temo.llegada;
+                    pos = i;
+                    nuevo = temo;
+                }
             }
-        }
-        cola.remove(pos);
-        cola2.add(nuevo);
+            cola.remove(pos);
+            cola2.add(0,nuevo);
+            tam = cola.size();
+            temp = 0;
+            pos = 0;
+
+        }while(cola.size()>0);
+
     } 
 }
