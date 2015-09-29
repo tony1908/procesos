@@ -39,8 +39,6 @@ public class Planificador{
                      Proceso proceso = new Proceso(nombre,rafaga,memoria,llegada,id,prioridad,quantum);
                      cola.add(proceso);
                  }
-                    System.out.println(cola);
-                    acomodarObjetos(cola);
           
          break;
              case 2:
@@ -122,7 +120,7 @@ public class Planificador{
 	    return randomNum;
 	}
 
-    public static void acomodarObjetos(ArrayList<Proceso> cola){
+    public static ArrayList<Proceso>  acomodarObjetos(ArrayList<Proceso> cola){
         int i;
         int temp = 0;
         int pos = 0;
@@ -148,6 +146,6 @@ public class Planificador{
             pos = 0;
 
         }while(cola.size()>0);
-
+        return(cola2);
     } 
 }
